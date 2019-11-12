@@ -1,6 +1,7 @@
 #include <iostream>
 #include <memory.h>
 #include <stack>
+#include <deque>
 
 typedef struct BinaryTreeNode
 {
@@ -84,6 +85,27 @@ void PreTraverse(BTreeNode* root)
 	}
 }
 
+// 层序 使用队列
+void SeqTraverse(BTreeNode* root)
+{
+	if (!root)
+		return;
+	std::deque<BTreeNode *> q;
+	q.push_back(root);
+
+	while (!q.empty())
+	{
+		BTreeNode *node = q.front();
+		if (node)
+		{
+			std::cout << node->value << std::endl;
+			q.push_back(node->lChild);
+			q.push_back(node->rChild);
+		}
+		q.pop_front();
+	}
+}
+
 int main()
 {
 	BTreeNode* root = CreateTree();
@@ -91,7 +113,8 @@ int main()
 		return 0;
 
 	//PreTraverse(root);
-	MidTraverse(root);
+	//MidTraverse(root);
+	SeqTraverse(root);
 
 	delete []root;
 	return 0;
