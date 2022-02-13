@@ -176,5 +176,5 @@ void testAstar()
 int main()
 {
 	testAstar();
-	return 1;
+	return 0;
 }
